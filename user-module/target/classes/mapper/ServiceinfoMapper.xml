@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--author 王研博 林佳评-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.scdx.cloud.user.mapper.ServiceinfoMapper">
+
+    <resultMap type="com.gxa.scdx.cloud.user.pojo.Serviceinfo" id="ServiceinfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="displayName" column="display_name" jdbcType="VARCHAR"/>
+        <result property="serviceName" column="service_name" jdbcType="VARCHAR"/>
+        <result property="startType" column="start_type" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+        <result property="binaryPathName" column="binary_path_name" jdbcType="VARCHAR"/>
+        <result property="deviceId" column="device_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Beas_Column_List">
+        id
+        , display_name, service_name, start_type, state, binary_path_name, device_id
+    </sql>
+
+    <!--查询所有主键和名称-->
+    <select id="selectAll" resultMap="ServiceinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.serviceinfo
+        <where>
+            <if test="displayName != null and displayName != ''">
+                display_name = #{displayName},
+            </if>
+            <if test="serviceName != null and serviceName != ''">
+                service_name = #{serviceName},
+            </if>
+            <if test="startType != null and startType != ''">
+                start_type = #{startType},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="binaryPathName != null and binaryPathName != ''">
+                binary_path_name = #{binaryPathName},
+            </if>
+            <if test="deviceId != null">
+                device_id = #{deviceId},
+            </if>
+        </where>
+    </select>
+
+    <!--查询单个-->
+    <select id="selectById" resultMap="ServiceinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.serviceinfo
+        where id = #{id}
+    </select>
+
+    <!--根据条件查询当前表的满足条件的个数-->
+    <select id="selectForCount" resultType="int">
+        select
+        count(id)
+        from scdx02.serviceinfo
+        <where>
+            <if test="name != null and name != ''">
+                display_name like "%"#{name}"%"
+            </if>
+            <if test="state != null and state != ''">
+                and state like "%"#{state}"%"
+            </if>
+            <if test="deviceId != null and deviceId != ''">
+                and device_id = #{deviceId}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectForPage" resultMap="ServiceinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.serviceinfo
+        <where>
+            <if test="name != null and name != ''">
+                display_name like "%"#{name}"%"
+            </if>
+            <if test="state != null and state != ''">
+                and state like "%"#{state}"%"
+            </if>
+            <if test="deviceId != null and deviceId != ''">
+                and device_id = #{deviceId}
+            </if>
+        </where>
+        limit #{index},10;
+    </select>
+    <select id="countById" resultType="java.lang.Integer">
+        select count(id) from scdx02.serviceinfo;
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="com.gxa.scdx.cloud.user.pojo.Serviceinfo">
+        insert into scdx02.serviceinfo(id, display_name, service_name, start_type, state, binary_path_name, device_id)
+        values (#{id}, #{displayName}, #{serviceName}, #{startType}, #{state}, #{binaryPathName}, #{deviceId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateById" parameterType="com.gxa.scdx.cloud.user.pojo.Serviceinfo">
+        update scdx02.serviceinfo
+        <set>
+            <if test="displayName != null and displayName != ''">
+                display_name = #{displayName},
+            </if>
+            <if test="serviceName != null and serviceName != ''">
+                service_name = #{serviceName},
+            </if>
+            <if test="startType != null and startType != ''">
+                start_type = #{startType},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="binaryPathName != null and binaryPathName != ''">
+                binary_path_name = #{binaryPathName},
+            </if>
+            <if test="deviceId != null">
+                device_id = #{deviceId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from scdx02.serviceinfo
+        where id = #{id}
+    </delete>
+
+</mapper>

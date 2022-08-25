@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--author 王研博 王楠楠-->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.scdx.cloud.user.mapper.PatchinfoMapper">
+
+    <resultMap type="com.gxa.scdx.cloud.user.pojo.Patchinfo" id="PatchinfoMap">
+        <result property="patchId" column="patch_id" jdbcType="VARCHAR"/>
+        <result property="installedOn" column="installed_on" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="installedBy" column="installed_by" jdbcType="VARCHAR"/>
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="deviceId" column="device_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Beas_Column_List">
+        patch_id
+        , installed_on, description, installed_by, id, device_id
+    </sql>
+
+    <!--查询所有主键和名称-->
+    <select id="selectAll" resultMap="PatchinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.patchinfo
+        <where>
+            <if test="patchId != null and patchId != ''">
+                patch_id = #{patchId},
+            </if>
+            <if test="installedOn != null and installedOn != ''">
+                installed_on = #{installedOn},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="installedBy != null and installedBy != ''">
+                installed_by = #{installedBy},
+            </if>
+            <if test="deviceId != null">
+                device_id = #{deviceId},
+            </if>
+        </where>
+    </select>
+
+    <!--查询单个-->
+    <select id="selectById" resultMap="PatchinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.patchinfo
+        where id = #{id}
+    </select>
+
+    <!--根据条件查询当前表的满足条件的个数-->
+    <select id="selectForCount" resultType="int">
+        select
+        count(id)
+        from scdx02.patchinfo
+        <where>
+            <if test="search_id != null and search_id != ''">
+                device_id = #{search_id}
+            </if>
+            <if test="search_number != null and search_number != ''">
+                and patch_id like "%"#{search_number}"%"
+            </if>
+            <if test="search_start_time != null and search_start_time != '' and search_end_time != null and search_end_time != ''">
+                and installed_on  between #{search_start_time} and #{search_end_time}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectForPage" resultMap="PatchinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.patchinfo
+        <where>
+            <if test="search_id != null and search_id != ''">
+                device_id = #{search_id}
+            </if>
+            <if test="search_number != null and search_number != ''">
+                and patch_id like "%"#{search_number}"%"
+            </if>
+            <if test="search_start_time != null and search_start_time != '' and search_end_time != null and search_end_time != ''">
+                and installed_on  between #{search_start_time} and #{search_end_time}
+            </if>
+        </where>
+        limit #{index},10;
+    </select>
+    <select id="countById" resultType="java.lang.Integer">
+        select count(id) from scdx02.patchinfo;
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="com.gxa.scdx.cloud.user.pojo.Patchinfo">
+        insert into scdx02.patchinfo(patch_id, installed_on, description, installed_by, id, device_id)
+        values (#{patchId}, #{installedOn}, #{description}, #{installedBy}, #{id}, #{deviceId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateById" parameterType="com.gxa.scdx.cloud.user.pojo.Patchinfo">
+        update scdx02.patchinfo
+        <set>
+            <if test="patchId != null and patchId != ''">
+                patch_id = #{patchId},
+            </if>
+            <if test="installedOn != null and installedOn != ''">
+                installed_on = #{installedOn},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="installedBy != null and installedBy != ''">
+                installed_by = #{installedBy},
+            </if>
+            <if test="deviceId != null">
+                device_id = #{deviceId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from scdx02.patchinfo
+        where id = #{id}
+    </delete>
+
+</mapper>

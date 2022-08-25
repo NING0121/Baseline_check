@@ -1,0 +1,90 @@
+<!--
+ * sendTask 页面
+ *
+ * @author 王研博 代宇盛
+ * @version 1.0
+ * @since 2021-06-25 11:06:08
+-->
+<!--author 王研博-->
+<!--author 代宇盛ajax-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>扫描任务分配</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <script src="jquery/jquery-3.5.1.js"></script>
+</head>
+<body>
+
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">任务分配选项</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="0" lay-filter="dx" title="检测主机信息" checked>
+            <input type="radio" name="sex" value="1" lay-filter="dx" title="进行基线核查">
+            <input type="radio" name="sex" value="2" lay-filter="dx" title="检测自启动项">
+            <input type="radio" name="sex" value="3" lay-filter="dx" title="检测补丁信息">
+            <input type="radio" name="sex" value="4" lay-filter="dx" title="检测服务信息">
+
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">机器扫描选项</label>
+        <div class="layui-input-block">
+            <select name="interest" lay-filter="aihao">
+                <option value="1"selected="">1号机</option>
+                <option value="2" >2号机</option>
+                <option value="3">3号机</option>
+                <option value="4">4号机</option>
+                <option value="5">5号机</option>
+            </select>
+        </div>
+    </div>
+
+
+    <button type="button" class="layui-btn" id="dispatch">分配查询任务</button>
+</form>
+
+
+
+<!-- 你的 HTML 代码 -->
+
+<script src="./layui/layui.js"></script>
+<script>
+    x = 1;
+    y = 0;
+    layui.use(['layer', 'form'], function(){
+        var layer = layui.layer
+            ,form = layui.form;
+        form.on('select(aihao)', function (data) {
+            x = data.value;
+        });
+        form.on('radio(dx)', function(data){
+
+
+            y = data.value;
+        });
+
+    });
+
+    $("#dispatch").click(
+        function(){
+
+            requrl = "/scan/update/"+x+"/"+y;
+            $.ajax({   // 异步请求   想象成线程状态
+                url: requrl,//"/scan/update/1/0",   // 请求路径
+                type: "get",               // 请求的方式，不区分大小写   传递json不能使用get请求，否则返回400错误
+
+                success: function (response) {                        // 后台服务响应成功，自动返回数据
+                console.log(response);
+                alert('分派任务成功！');
+                }
+            });
+        })
+
+</script>
+</body>
+</html>

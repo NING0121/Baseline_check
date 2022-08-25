@@ -1,0 +1,4 @@
+﻿autorun_item,path
+VMware VM3DService Process,"""C:\Windows\system32\vm3dservice.exe"" -u"
+VMware User Process,"""C:\Program Files\VMware\VMware Tools\vmtoolsd.exe"" -n vmusr"
+SunJavaUpdateSched,"""C:\Program Files (x86)\Common Files\Java\Java Update\jusched.exe"""

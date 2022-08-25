@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--author 代宇盛 王楠楠-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.scdx.cloud.user.mapper.AdminMapper">
+    <resultMap type="com.gxa.scdx.cloud.user.pojo.Admin" id="AdminMap">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="adminName" column="admin_name" jdbcType="VARCHAR"/>
+        <result property="adminPwd" column="admin_pwd" jdbcType="VARCHAR"/>
+        <result property="adminPhone" column="admin_phone" jdbcType="VARCHAR"/>
+        <result property="adminStatus" column="admin_status" jdbcType="INTEGER"/>
+        <result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
+        <result property="departmentId" column="department_id" jdbcType="INTEGER"/>
+        <result property="roleId" column="role_id" jdbcType="INTEGER"/>
+        <association property="department" javaType="com.gxa.scdx.cloud.user.pojo.Department">
+            <result property="departmentName" column="department_name" jdbcType="VARCHAR"/>
+            <result property="departmentNumber" column="department_number" jdbcType="VARCHAR"/>
+        </association>
+        <association property="role" javaType="com.gxa.scdx.cloud.user.pojo.Role">
+            <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+            <result property="roleAuth" column="role_auth" jdbcType="INTEGER"/>
+        </association>
+    </resultMap>
+
+    <sql id="Beas_Column_List">
+        id, admin_name, admin_pwd, admin_phone, admin_status, last_login_time, create_time, update_time, is_deleted, department_id, role_id        
+    </sql>
+
+    <!--查询所有主键和名称-->
+    <select id="selectAll" resultMap="AdminMap">
+        select u.id, u.admin_name, u.admin_pwd, u.admin_phone, u.admin_status, u.last_login_time, u.create_time, u.update_time, u.is_deleted, d.department_name, r.role_name  from admin u
+        left join department d on u.department_id = d.id
+        left join role r on u.role_id = r.id
+    </select>
+
+    <!--查询单个-->
+    <select id="selectById" resultMap="AdminMap">
+        select
+        u.id, u.admin_name, u.admin_pwd, u.admin_phone, u.admin_status, u.last_login_time, u.create_time, u.update_time, u.is_deleted, d.department_name, r.role_name  from admin u
+        left join department d on u.department_id = d.id
+        left join role r on u.role_id = r.id
+        where u.id = #{id}
+    </select>
+
+    <!--根据条件查询当前表的满足条件的个数-->
+    <select id="selectForCount" resultType="int">
+        select
+        count(id)
+        from scdx02.admin
+        <where>
+            <if test="search_username != null and search_username != ''">
+                admin_name like "%"#{search_username}"%"
+            </if>
+            <if test="search_phone != null and search_phone != ''">
+                and admin_phone like "%"#{search_phone}"%"
+            </if>
+            <if test="search_start_time != null and search_start_time != '' and search_end_time != null and search_end_time != ''">
+                and last_login_time  between #{search_start_time} and #{search_end_time}
+            </if>
+
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectForPage" resultMap="AdminMap">
+        select
+        u.id, u.admin_name, u.admin_pwd, u.admin_phone, u.admin_status, u.last_login_time, u.create_time, u.update_time, u.is_deleted, d.department_name, r.role_name, u.department_id, u.role_id from admin u
+        left join department d on u.department_id = d.id
+        left join role r on u.role_id = r.id
+        <where>
+            <if test="search_username != null and search_username != ''">
+                u.admin_name like "%"#{search_username}"%"
+            </if>
+            <if test="search_phone != null and search_phone != ''">
+                and u.admin_phone like "%"#{search_phone}"%"
+            </if>
+            <if test="search_start_time != null and search_start_time != '' and search_end_time != null and search_end_time != ''">
+                and u.last_login_time  between #{search_start_time} and #{search_end_time}
+            </if>
+        </where>
+        limit #{index},10;
+    </select>
+
+    <select id="getUser" parameterType="java.lang.String" resultMap="AdminMap">
+        select
+        u.id, u.admin_name, u.admin_pwd, u.admin_phone, u.admin_status, u.last_login_time, u.create_time, u.update_time, u.is_deleted, d.department_name, r.role_name, u.role_id, u.department_id, u.role_id from admin u
+        left join department d on u.department_id = d.id
+        left join role r on u.role_id = r.id
+        where admin_name=#{username}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="com.gxa.scdx.cloud.user.pojo.Admin">
+        insert into scdx02.admin(id, admin_name, admin_pwd, admin_phone, admin_status, last_login_time, create_time, update_time, is_deleted, department_id, role_id)
+        values (#{id}, #{adminName}, #{adminPwd}, #{adminPhone}, #{adminStatus}, #{lastLoginTime}, #{createTime}, #{updateTime}, #{isDeleted}, #{departmentId}, #{roleId})
+    </insert>
+
+
+
+    <insert id="registerUser" parameterType="com.gxa.scdx.cloud.user.pojo.Admin">
+        insert into scdx02.admin(admin_name, admin_pwd, create_time, admin_phone, admin_status)
+        values (#{username}, #{password}, #{createTime}, #{phone}, 1)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateById" parameterType="com.gxa.scdx.cloud.user.pojo.Admin">
+        update scdx02.admin
+        <set>
+            <if test="adminName != null and adminName != ''">
+                admin_name = #{adminName},
+            </if>
+            <if test="adminPwd != null and adminPwd != ''">
+                admin_pwd = #{adminPwd},
+            </if>
+            <if test="adminPhone != null and adminPhone != ''">
+                admin_phone = #{adminPhone},
+            </if>
+            <if test="adminStatus != null">
+                admin_status = #{adminStatus},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <update id="updateByName" parameterType="com.gxa.scdx.cloud.user.pojo.Admin">
+        update scdx02.admin
+        <set>
+            <if test="adminPwd != null and adminPwd != ''">
+                admin_pwd = #{adminPwd},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId},
+            </if>
+        </set>
+        where admin_name = #{adminName}
+    </update>
+
+
+    <!--    <update id="updateByName" parameterType="com.gxa.scdx.cloud.user.pojo.Admin">-->
+<!--        update scdx02.admin-->
+<!--        <set>-->
+<!--            <if test="lastLoginTime != null">-->
+<!--                last_login_time = #{lastLoginTime},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where admin_name = #{adminName}-->
+<!--    </update>-->
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from scdx02.admin where id = #{id}
+    </delete>
+
+</mapper>

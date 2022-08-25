@@ -1,0 +1,444 @@
+<!--
+ * patch_info 页面
+ *
+ * @author 王楠楠
+ * @version 1.0
+ * @since 2021-06-25 11:06:08
+-->
+<!--author：王楠楠-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>基线数据采集分析云平台</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="jquery/jquery-3.5.1.js"></script>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo layui-hide-xs layui-bg-black">基线分析云平台</div>
+        <!-- 头部区域（可配合layui 已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <!-- 移动端显示 -->
+            <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+                <i class="layui-icon layui-icon-spread-left"></i>
+            </li>
+
+            <li class="layui-nav-item layui-hide-xs"><a href="">日志系统</a></li>
+            <li class="layui-nav-item layui-hide-xs"><a href="">扩展系统</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">扩展组件</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">扩展组件01</a></dd>
+                    <dd><a href="">扩展组件02</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                <a href="javascript:;" >
+                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
+                         class="layui-nav-img layui-inline">
+                    <h4 id="show" class="layui-inline"></h4>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a id="person_info">个人信息</a></dd>
+                    <dd><a href="/logout">退出</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+                <a href="javascript:;">
+                    <i class="layui-icon layui-icon-more-vertical"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item">
+                    <a class="" href="index.html">首页</a>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="historyshow.html">基线检查信息</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="historyshow.html">系统基本信息</a></dd>
+                        <dd><a href="serviceInfo.html">系统服务信息</a></dd>
+                        <dd><a class="layui-this" href="patch_info.html">系统补丁信息</a></dd>
+                        <dd><a href="autorun_info.html">自启动项信息</a></dd>
+                        <dd><a href="policy_info.html">基线检查结果</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:void(0);">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="user.html">用户列表管理</a></dd>
+                        <dd><a href="department.html">部门列表管理</a></dd>
+                        <dd><a href="authManage.html">权限列表管理</a></dd>
+                        <dd><a href="sendTask.html">扫描任务管理</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body"  style="margin-top: 10px; margin-left: 10px; margin-right: 10px">
+        <!-- 面包屑导航 -->
+        <span class="layui-breadcrumb">
+            <a href="index.html">首页</a>
+            <a href="historyshow.html">基线检查</a>
+            <a><cite>系统补丁信息</cite></a>
+        </span>
+
+        <!-- 水平线 -->
+        <hr class="layui-bg-blue">
+
+        <!-- 搜索条件 -->
+        <fieldset class="layui-elem-field">
+            <legend>筛选条件</legend>
+            <div class="layui-field-box">
+                <div class="layui-form-item layui-form-pane">   <!--  每一个这样的div代表一个面板状态 每一个面板会自动换行 -->
+                    <label class="layui-form-label">设备ID</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="search_id" placeholder="查询设备ID" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">补丁编号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="search_number" placeholder="模糊查询补丁编号" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">安装时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="search_time" placeholder="模糊查询补丁安装时间" class="layui-input">
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn layui-btn-radius layui-btn-warm" id="iReset">重置</button>
+                        <button class="layui-btn layui-btn-radius layui-btn-normal" id="searchVal">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <table class="layui-hide" id="test" lay-filter="test"></table>
+
+
+        <script type="text/html" id="person_form">
+            <div class="layui-field-box">
+                <div class="layui-form-item layui-form-pane">
+                    <label class="layui-form-label">用户ID</label>
+                    <div class="layui-input-block" style="margin-bottom: 5px">
+                        <input type="text" id="person_id" class="layui-input" readonly style="background-color: khaki">
+                    </div>
+                    <label class="layui-form-label" >用户名称</label>
+                    <div class="layui-input-block" style="margin-bottom: 5px">
+                        <input type="text" id="person_username" class="layui-input" readonly style="background-color: khaki">
+                    </div>
+                    <label class="layui-form-label">用户角色</label>
+                    <div class="layui-input-block" style="margin-bottom: 5px">
+                        <input type="text" id="person_role" class="layui-input" readonly style="background-color: khaki">
+                    </div>
+                    <label class="layui-form-label">用户部门</label>
+                    <div class="layui-input-block" style="margin-bottom: 5px">
+                        <input type="text" id="person_department" class="layui-input" readonly style="background-color: khaki">
+                    </div>
+                    <label class="layui-form-label">密码</label>
+                    <div class="layui-input-block" style="margin-bottom: 5px">
+                        <input type="password" id="person_password" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">手机号</label>
+                    <div class="layui-input-block" style="margin-bottom: 5px">
+                        <input type="text" id="person_phone" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-block" style="margin-bottom: 5px">
+                        <input type="text" id="person_status" class="layui-input">
+                    </div>
+                    <label class="layui-form-label">最后登录时间</label>
+                    <div class="layui-input-block" style="margin-bottom: 5px">
+                        <input type="text" id="person_lastLoginTime" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </script>
+
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © copyright 2021-2030  123.56.243.148:8080  四川大学网络基线检查分析云平台
+    </div>
+</div>
+<script src="layui/layui.js"></script>
+<script>
+
+</script>>
+<script>
+
+    $(function () {
+
+        // 重置按钮
+        $("#iReset").click(function () {
+            $("#search_id").val("");
+            $("#search_number").val("");
+            $("#search_time").val("");
+            search();
+        });
+
+        // 查询按钮
+        $("#searchVal").click(function () {
+            const regexpSize = /([\s\S]*) 到 ([\s\S]*)/;
+            var search_id = $("#search_id").val();
+            var search_number = $("#search_number").val();
+            var search_start_time = $("#search_time").val();
+            var search_end_time = $("#search_time").val();
+            if (search_start_time!=null && search_start_time!== "")
+                search_start_time =search_start_time.match(regexpSize)[1];
+            if (search_end_time!=null && search_end_time!== "")
+                search_end_time = search_end_time.match(regexpSize)[2];
+
+            // console.log()
+            search(search_id, search_number, search_start_time, search_end_time);
+
+        });
+
+        // 个人信息列表渲染
+        $("#person_info").click(function () {
+            var person_username = $("#show").html();
+            var id;
+            console.log(person_username)
+            $.ajax({   // 异步请求   想象成线程状态
+                url: "/admin/getUser",   // 请求路径
+                type: "post",               // 请求的方式，不区分大小写   传递json不能使用get请求，否则返回400错误
+                contentType: "application/json;charset=utf-8",
+                datatype: "text",
+                // request中传递的key-value值
+                data: JSON.stringify({
+                    username: person_username
+                }),
+                success: function (response) {// 后台服务响应成功，自动返回数据
+                    console.log(response)
+                    id = response.id;
+                    $("#person_id").val(response.id);
+                    if(response.role != null){
+                        $("#person_role").val(response.role.roleName);
+                    }
+                    if(response.department != null){
+                        $("#person_department").val(response.department.departmentName);
+                    }
+                    $("#person_username").val(response.adminName);
+                    $("#person_password").val(response.adminPwd);
+                    $("#person_phone").val(response.adminPhone);
+                    $("#person_status").val(response.adminStatus);
+                    $("#person_lastLoginTime").val(response.lastLoginTime);
+                }
+            });
+            layer.open({
+                type: 1
+                ,title: '用户信息'         //不显示标题栏
+                ,closeBtn: false
+                ,area: ['600px','500px']  // 宽和高
+                ,shade: 0.8               // 透明度
+                ,id: 'LAY_layuipro'       //设定一个id，防止重复弹出
+                ,btn: ['修改', '取消']    // 两个按钮显示的文字内容
+                ,btnAlign: 'c'
+                ,moveType: 1             //拖拽模式，0或者1
+                ,content: $('#person_form').html()// 引入自定义表单
+                ,success:function (layero,index) {
+                    var laydate = layui.laydate;
+
+                    //执行一个laydate实例
+                    laydate.render({
+                        elem: '#person_lastLoginTime'  //指定元素
+                        , type: 'datetime'
+                    });
+                }
+                ,btn1: function(index, layero){
+                    var update_username = $("#person_username").val();
+                    var update_status = $("#person_status").val();
+                    var update_phone = $("#person_phone").val();
+                    var last_login_time = $("#person_lastLoginTime").val();
+                    var update_password = $("#person_password").val();
+
+                    $.ajax({   // 异步请求   想象成线程状态
+                        url:"/admin/updateById",   // 请求路径
+                        type:"post",               // 请求的方式，不区分大小写   传递json不能使用get请求，否则返回400错误
+                        contentType:"application/json;charset=utf-8",
+                        datatype:"text",
+                        // request中传递的key-value值
+                        data:JSON.stringify({
+                            id:id,
+                            adminName:update_username,
+                            adminPwd:update_password,
+                            adminPhone:update_phone,
+                            adminStatus:update_status,
+                            lastLoginTime:last_login_time
+                        }),
+                        success:function(response){// 后台服务响应成功，自动返回数据
+                            console.log(response)
+                            if(response.code === 200) {
+                                layer.close(index);   // 关闭当前对话框
+                                alert("修改成功!");
+                                search();
+                            }
+                            else {
+                                alert("更新失败，请稍后重试!");
+                            }
+                        },
+                        error:function(response){             // 网络请求失败，自动调用此方法
+                            console.log("出错" + response);
+                            layer.close(index);   // 关闭当前对话框
+                        }
+                    });
+                    // 关闭弹出框
+
+                    layer.close(index);
+                }
+            })
+        });
+
+
+
+        search();
+
+
+
+        function search(search_id, search_number, search_start_time, search_end_time) {
+
+            // 响应式  也就是适配不同的分辨率
+            layui.use('table', function(){
+                var table = layui.table;
+                var json = {};
+
+
+                if(search_id != null && search_id !=="")
+                    json.search_id = search_id;
+                if(search_number != null && search_number !=="")
+                    json.search_number = search_number;
+                if(search_start_time != null && search_start_time !== "")
+                    json.search_start_time = search_start_time;
+                if(search_end_time != null && search_end_time !== "")
+                    json.search_end_time = search_end_time;
+
+
+                console.log(json)
+
+
+                table.render({   // 渲染table数据表格
+                    elem: '#test'
+                    ,url:'/patchinfo/selectForPage'
+                    ,where:json  // 添加的请求参数
+                    ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+                    ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                        title: '提示'
+                        ,layEvent: 'LAYTABLE_TIPS'
+                        ,icon: 'layui-icon-tips'
+                    }]
+                    ,title: '补丁表数据'
+                    ,cols: [[
+                        {type: 'checkbox', fixed: 'left'}
+                        ,{field:'id', title:'ID', width:100, fixed: 'left', unresize: true, sort: true, type: "numbers"}
+                        ,{field:'deviceID', title:'设备ID', width:300, unresize: true, templet:function (res) {
+                                return '<em>'+ res.deviceId +'</em>'
+                            }}
+                        ,{field:'patchNumber', title:'补丁编号', width:300, unresize: true, templet:function (res) {
+                                return '<em>'+ res.patchId +'</em>'
+                            }}
+                        ,{field:'patchTime', title:'安装时间', width:300, unresize: true, templet:function (res) {
+                                return '<em>'+ res.installedOn +'</em>'
+                            }}
+                        ,{field:'patchInstaller', title:'安装者', width:300, unresize: true, templet:function (res) {
+                                return '<em>'+ res.installedBy +'</em>'
+                            }}
+                        ,{field:'patchDescription', title:'补丁描述', width:300, unresize: true, templet:function (res) {
+                                return '<em>'+ res.description +'</em>'
+                            }}
+                    ]]
+                    ,page: {limits:[10], prev:"上一页", next:"下一页"}
+                    ,done: function (res, page, count) {
+                        console.log(json);
+                        console.log(res);
+                        console.log(page);
+                        console.log(count);
+                        if(res.code === 10500) {
+                            alert('您没有此权限访问');
+                            window.location.href="/index.html";
+                        }
+                    }
+                });
+
+                //头工具栏事件
+                table.on('toolbar(test)', function(obj){
+                    var checkStatus = table.checkStatus(obj.config.id);
+                    switch(obj.event){
+                        //自定义头工具栏右侧图标 - 提示
+                        case 'LAYTABLE_TIPS':
+                            layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                            break;
+                    };
+                });
+
+            });
+        }
+
+        $.ajax({
+            url:"/shiro/check",                               			 // 请求路径   请求服务器的哪一个接口
+            type:"post",                                     // 请求的方式，不区分大小写   传递json不能使用get请求，否则返回400错误
+            datatype:"text",
+            data:{},
+            success:function(response){                      // 后台服务响应成功，自动返回数据
+                // 页面级的调试规则，可以输入到页面的控制台中
+                $("#show").html(response.username);
+            },
+            error:function(response){                        // 网络请求失败，自动调用此方法
+                console.log("出错" + response);
+            }
+        })
+    });
+</script>
+
+
+
+
+
+<script>
+    //JS
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#search_time'  //指定元素
+            ,type:'datetime'
+            ,range:'到'
+        });
+    });
+    layui.use(['element', 'layer', 'util'], function(){
+        var element = layui.element
+            ,layer = layui.layer
+            ,util = layui.util
+            ,$ = layui.$;
+
+        //头部事件
+        util.event('lay-header-event', {
+            //左侧菜单事件
+            menuLeft: function(othis){
+                layer.msg('展开左侧菜单的操作', {icon: 0});
+            }
+            ,menuRight: function(){
+                layer.open({
+                    type: 1
+                    ,content: '<div style="padding: 15px;">处理右侧面板的操作</div>'
+                    ,area: ['260px', '100%']
+                    ,offset: 'rt' //右上角
+                    ,anim: 5
+                    ,shadeClose: true
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

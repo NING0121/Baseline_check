@@ -1,0 +1,173 @@
+<!--
+ * login 页面
+ *
+ * @author 林佳评 代宇盛
+ * @version 1.0
+ * @since 2021-06-25 11:06:08
+-->
+<!--author 代宇盛ajax-->
+<!--author 林佳评ui界面-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title> 基线检查 登录 - 单点登录
+	</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="login/css/e_sso_style.css" type="text/css" media="print, screen">
+	<script type="text/javascript" src="jquery/jquery-3.5.1.js"></script>
+	<script type="text/javascript" src="login/js/sso.js"></script>
+	<script type="text/javascript" language="JavaScript" src="login/js/e_moc_lib.js"></script>
+	<script type="text/javascript" language="JavaScript" src="login/js/e_sso_check.js"></script>
+	<style> html{display : none ; } </style>
+	<script>
+		if (self == top)
+		{
+			document.documentElement.style.display = 'block';
+		}
+		else
+		{
+			top.location = self.location;
+		}
+	</script>
+	<script>jQuery(document).ready(function($) { doLoad('正在登录。请稍候...'); });</script>
+	<script>stripHTML();</script>
+</head>
+<body class="f17 f17v2">
+<div class="f17w1">
+	<div class="f17w2" style="display:none">
+		<img src="login/img/sso-f17v2-bgimg.jpg">
+	</div>
+	<div class="cb41 cb41v0">
+		<div class="cb41w1">
+			<h2> 基线检查 帐户登录
+			</h2>
+			<form method="get" name="LoginForm" autocomplete="off">
+				<ul>
+					<li>
+						<div class="cb41w2">
+							<label for="sso_username"> 用户名
+								<span class="hideFromScreen">
+                                    <span id="readerunameerrormsg" class="error-show"></span>
+                                    <span id="readerunamerequired" class="error-hide"> 错误：请输入您的用户名和密码</span>
+                                </span>
+							</label>
+							<input type="text" id="sso_username" name="ssousername" title=" 请输入用户名" maxlength="80" value="" tabindex="1"/>
+							<span class="cb41w5">
+                                <span class="cb41w6">
+                                    <span role="tooltip" class="cb41noteshoverbtn" tabindex="5" title=" 用户名帮助">
+                                        <span class="cb41notescontent"> o(*￣▽￣*)ブ</span>
+                                    </span>
+                                </span>
+                            </span>
+						</div>
+					</li>
+					<li>
+						<div class="cb41w3">
+							<label for="ssopassword"> 密码
+								<span class="hideFromScreen">
+                                    <span id="readerpwderrormsg" class="error-show"></span>
+                                    <span id="readerpwdrequired" class="error-hide"> 错误：请输入您的用户名和密码</span>
+                                </span>
+							</label>
+							<input type="password" id="ssopassword" name="password" title=" 请输入密码" value="" maxlength="255" tabindex="2"/>
+							<span class="cb41w5">
+                                <span class="cb41w6">
+                                    <span role="tooltip" class="cb41noteshoverbtn" tabindex="7" title=" 密码帮助">
+                                        <span class="cb41notescontent"><a href="javascript:void(0)" tabindex="8" target="_blank">
+                                            忘记密码？
+                                        </a>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+						</div>
+					</li>
+				</ul>
+				<div class="cb41w7">
+                    <span id="required" class="error-hide">
+                        <div class="cb41error">
+                            请输入您的用户名和密码
+                        </div>
+                    </span>
+				</div>
+				<div class="cb41w4">
+                    <span>
+                        <input type="button" id="signin_button" class="sign-in-button" value=" 登录" tabindex="3" title=" 请单击此处登录"/>
+                    </span>
+				</div>
+				<div class="need-help"></div>
+			</form>
+		</div>
+		<div class="cb41w1">
+			<h3> 没有帐户？
+			</h3>
+			<div class="cb41w4">
+                <span>
+                    <a href="register.html" class="cb41create-btn" tabindex="9" target="_blank"> 创建帐户</a>
+                </span>
+			</div>
+			<div class="cb41w8">
+				<div id="u17" class="u17 u17v0">
+					<div class="u17w1 cwidth">
+						<ul>
+							<li>&copy; SCU 基线检查</li>
+							<li><a href="javascript:void(0)" target="_blank"> 使用条款
+							</a></li>
+							<li><a href="javascript:void(0)" target="_blank"> 隐私政策
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script>
+	$(function () {
+		$("#signin_button").click(function () {
+		if($("#sso_username").val()=="" || $("#ssopassword").val()==""){
+			alert("请输入用户名或密码！")
+		}
+		else {
+
+			if(doLogin(document.LoginForm)){
+			var username = $("#sso_username").val();
+			var password = $("#ssopassword").val();
+			$.ajax({
+				url: "/shiro/login",
+				type: "post",
+				datatype: "text",
+				data: {
+					username: username,
+					password: password
+				},
+				success: function (response) {
+					console.log(response);
+					if (response.code === 200) {
+						alert("登录成功!");
+						document.getElementById('signin_button').value = "登录";
+						document.getElementById('signin_button').disabled = false;
+						//根据用户权限跳转到相应用户页面
+						window.location.href = "index.html";
+
+					} else {
+						document.getElementById('signin_button').value = "登录";
+						document.getElementById('signin_button').disabled = false;
+						alert("登录失败，用户名或者密码错误!");
+					}
+				},
+				error: function (response) {
+					console.log("出错" + response);
+				}
+			});
+		}
+			}
+		});
+	});
+</script>
+</html>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--author 王研博 王楠楠-->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.scdx.cloud.user.mapper.FirstbootinfoMapper">
+
+    <resultMap type="com.gxa.scdx.cloud.user.pojo.Firstbootinfo" id="FirstbootinfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="autorunIten" column="autorun_iten" jdbcType="VARCHAR"/>
+        <result property="path" column="path" jdbcType="VARCHAR"/>
+        <result property="deviceId" column="device_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Beas_Column_List">
+        id
+        , autorun_iten, path, device_id
+    </sql>
+
+    <!--查询所有主键和名称-->
+    <select id="selectAll" resultMap="FirstbootinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.firstbootinfo
+        <where>
+            <if test="autorunIten != null and autorunIten != ''">
+                autorun_iten = #{autorunIten},
+            </if>
+            <if test="path != null and path != ''">
+                path = #{path},
+            </if>
+            <if test="deviceId != null">
+                device_id = #{deviceId},
+            </if>
+        </where>
+    </select>
+
+    <!--查询单个-->
+    <select id="selectById" resultMap="FirstbootinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.firstbootinfo
+        where id = #{id}
+    </select>
+
+    <!--根据条件查询当前表的满足条件的个数-->
+    <select id="selectForCount" resultType="int">
+        select
+        count(id)
+        from scdx02.firstbootinfo
+        <where>
+            <if test="search_id != null and search_id != ''">
+                device_id = #{search_id}
+            </if>
+            <if test="search_name != null and search_name != ''">
+                and autorun_iten like "%"#{search_name}"%"
+            </if>
+            <if test="search_path != null and search_path != ''">
+                and path like "%"#{search_path}"%"
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectForPage" resultMap="FirstbootinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.firstbootinfo
+        <where>
+            <if test="search_id != null and search_id != ''">
+                device_id = #{search_id}
+            </if>
+            <if test="search_name != null and search_name != ''">
+                and autorun_iten like "%"#{search_name}"%"
+            </if>
+            <if test="search_path != null and search_path != ''">
+                and path like "%"#{search_path}"%"
+            </if>
+        </where>
+        limit #{index},10;
+    </select>
+    <select id="countById" resultType="java.lang.Integer">
+        select count(id) from scdx02.firstbootinfo;
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="com.gxa.scdx.cloud.user.pojo.Firstbootinfo">
+        insert into scdx02.firstbootinfo(id, autorun_iten, path, device_id)
+        values (#{id}, #{autorunIten}, #{path}, #{deviceId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateById" parameterType="com.gxa.scdx.cloud.user.pojo.Firstbootinfo">
+        update scdx02.firstbootinfo
+        <set>
+            <if test="autorunIten != null and autorunIten != ''">
+                autorun_iten = #{autorunIten},
+            </if>
+            <if test="path != null and path != ''">
+                path = #{path},
+            </if>
+            <if test="deviceId != null">
+                device_id = #{deviceId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from scdx02.firstbootinfo
+        where id = #{id}
+    </delete>
+
+</mapper>

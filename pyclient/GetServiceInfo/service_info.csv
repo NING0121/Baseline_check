@@ -1,0 +1,126 @@
+DISPLAY_NAME,SERVICE_NAME,START_TYPE,STATE,BINARY_PATH_NAME
+"AMD External Events Utility","AMD External Events Utility","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\DriverStore\FileRepository\u0324672.inf_amd64_25422756be012b8f\B321356\atiesrxx.exe"
+"Application Information","Appinfo","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"AppX Deployment Service (AppXSVC)","AppXSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k wsappx -p"
+"AtherosSvc","AtherosSvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\drivers\AdminService.exe"
+"Windows Audio Endpoint Builder","AudioEndpointBuilder","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"Windows Audio","Audiosrv","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"Base Filtering Engine","BFE","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceNoNetworkFirewall -p"
+"Background Intelligent Transfer Service","BITS","2   AUTO_START  (DELAYED)","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k netsvcs -p"
+"Background Tasks Infrastructure Service","BrokerInfrastructure","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p"
+"蓝牙音频网关服务","BTAGService","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted"
+"AVCTP 服务","BthAvctpSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalService -p"
+"蓝牙支持服务","bthserv","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalService -p"
+"功能访问管理器服务","camsvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k appmodel -p"
+"连接设备平台服务","CDPSvc","2   AUTO_START  (DELAYED)","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalService -p"
+"Certificate Propagation","CertPropSvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs"
+"Microsoft Office 即点即用服务","ClickToRunSvc","3   DEMAND_START","4  RUNNING ","""C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe"" /service"
+"Client License Service (ClipSVC)","ClipSVC","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k wsappx -p"
+"CoreMessaging","CoreMessagingRegistrar","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceNoNetwork -p"
+"Intel(R) Content Protection HECI Service","cphs","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\DriverStore\FileRepository\igdlh64.inf_amd64_2cec8fd58a80e6ea\IntelCpHeciSvc.exe"
+"Intel(R) Content Protection HDCP Service","cplspcon","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\DriverStore\FileRepository\igdlh64.inf_amd64_2cec8fd58a80e6ea\IntelCpHDCPSvc.exe"
+"Cryptographic Services","CryptSvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k NetworkService -p"
+"DCOM Server Process Launcher","DcomLaunch","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p"
+"Device Association Service","DeviceAssociationService","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"DHCP Client","Dhcp","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"Connected User Experiences and Telemetry","DiagTrack","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k utcsvc -p"
+"显示策略服务","DispBrokerDesktopSvc","2   AUTO_START  (DELAYED)","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalService -p"
+"显示增强服务","DisplayEnhancementService","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"DNS Client","Dnscache","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k NetworkService -p"
+"Dolby DAX API Service","DolbyDAXAPI","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\dolbyaposvc\DAX3API.exe"
+"Delivery Optimization","DoSvc","2   AUTO_START  (DELAYED)","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k NetworkService -p"
+"Diagnostic Policy Service","DPS","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalServiceNoNetwork -p"
+"Data Sharing Service","DsSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"数据使用量","DusmSvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"Intel(R) Dynamic Platform and Thermal Framework service","esifsvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\Intel\DPTF\esif_uf.exe"
+"Windows Event Log","EventLog","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"COM+ Event System","EventSystem","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalService -p"
+"FCService","FCService","2   AUTO_START","4  RUNNING ","""E:\adobeFlashPlayer\FlashRepair\FCService.exe"""
+"Flash Helper Service","Flash Helper Service","3   DEMAND_START","4  RUNNING ","""C:\WINDOWS\SysWOW64\Macromed\Flash\FlashHelperService.exe"""
+"Fortemedia APO Control Service","FMAPOService","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\FMService64.exe"
+"Windows Font Cache Service","FontCache","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalService -p"
+"Windows Presentation Foundation Font Cache 3.0.0.0","FontCache3.0.0.0","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\Microsoft.Net\Framework64\v3.0\WPF\PresentationFontCache.exe"
+"Human Interface Device Service","hidserv","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"Intel(R) HD Graphics Control Panel Service","igfxCUIService2.0.0.0","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\DriverStore\FileRepository\igdlh64.inf_amd64_2cec8fd58a80e6ea\igfxCUIService.exe"
+"System Interface Foundation Service","ImControllerService","2   AUTO_START","4  RUNNING ","C:\WINDOWS\Lenovo\ImController\Service\Lenovo.Modern.ImController.exe"
+"Microsoft Store 安装服务","InstallService","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k netsvcs -p"
+"IP Helper","iphlpsvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k NetSvcs -p"
+"Intel(R) Dynamic Application Loader Host Interface Service","jhi_service","2   AUTO_START  (DELAYED)","4  RUNNING ","""C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL\jhi_service.exe"""
+"CNG Key Isolation","KeyIso","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\lsass.exe"
+"Server","LanmanServer","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"Workstation","LanmanWorkstation","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k NetworkService -p"
+"LenovoHotkeyService","LenovoHotkeyService","2   AUTO_START","4  RUNNING ","C:\WINDOWS\SysWOW64\svchost.exe -k drvsvcs"
+"Geolocation Service","lfsvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"Windows 许可证管理器服务","LicenseManager","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalService -p"
+"lLockscreen","lLockscreen","2   AUTO_START","4  RUNNING ","C:\Program Files (x86)\lLockscreen\lsmain.exe"
+"TCP/IP NetBIOS Helper","lmhosts","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"Local Session Manager","LSM","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p"
+"Windows Defender Firewall","mpssvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceNoNetworkFirewall -p"
+"Network Connection Broker","NcbService","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"Network List Service","netprofm","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalService -p"
+"Microsoft Passport Container","NgcCtnrSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"Microsoft Passport","NgcSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"Network Location Awareness","NlaSvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k NetworkService -p"
+"Network Store Interface Service","nsi","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalService -p"
+"Program Compatibility Assistant Service","PcaSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"Plug and Play","PlugPlay","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p"
+"IPsec Policy Agent","PolicyAgent","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k NetworkServiceNetworkRestricted -p"
+"Power","Power","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p"
+"User Profile Service","ProfSvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"qmbsrv","qmbsrv","2   AUTO_START","4  RUNNING ","""E:\腾讯电脑管家\QQPCMgr\13.10.21914.214\qmbsrv.exe"""
+"QPCore Service","QPCore","2   AUTO_START","4  RUNNING ","""C:\Program Files (x86)\Common Files\Tencent\QQProtect\Bin\QQProtect.exe"""
+"QQPCMgr RTP Service","QQPCRTP","2   AUTO_START","4  RUNNING ","""E:\腾讯电脑管家\QQPCMgr\13.10.21914.214\QQPCRTP.exe"" -r"
+"Remote Access Connection Manager","RasMan","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k netsvcs"
+"无线电管理服务","RmSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted"
+"RPC Endpoint Mapper","RpcEptMapper","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k RPCSS -p"
+"Remote Procedure Call (RPC) Locator","RpcLocator","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\locator.exe"
+"Remote Procedure Call (RPC)","RpcSs","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k rpcss -p"
+"RstMwService","RstMwService","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\DriverStore\FileRepository\iastorac.inf_amd64_48720fcc117e5841\RstMwService.exe"
+"Realtek Audio Universal Service","RtkAudioUniversalService","2   AUTO_START","4  RUNNING ","""C:\WINDOWS\System32\RtkAudUService64.exe"""
+"Security Accounts Manager","SamSs","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\lsass.exe"
+"Task Scheduler","Schedule","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"Windows 备份","SDRSVC","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k SDRSVC"
+"Windows 安全中心服务","SecurityHealthService","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\SecurityHealthService.exe"
+"付款和 NFC/SE 管理器","SEMgrSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalService -p"
+"System Event Notification Service","SENS","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"System Guard 运行时监视器代理","SgrmBroker","2   AUTO_START  (DELAYED)","4  RUNNING ","C:\WINDOWS\system32\SgrmBroker.exe"
+"Shell Hardware Detection","ShellHWDetection","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k netsvcs -p"
+"Print Spooler","Spooler","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\spoolsv.exe"
+"srvassist","srvassist","2   AUTO_START","2  START_PENDING ","C:\WINDOWS\System32\svchost.exe -k netsvcs"
+"SSDP Discovery","SSDPSRV","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation -p"
+"Secure Socket Tunneling Protocol Service","SstpSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalService -p"
+"State Repository Service","StateRepository","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k appmodel -p"
+"Storage Service","StorSvc","2   AUTO_START  (DELAYED)","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"SysMain","SysMain","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"System Events Broker","SystemEventsBroker","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p"
+"Touch Keyboard and Handwriting Panel Service","TabletInputService","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"Themes","Themes","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k netsvcs -p"
+"Time Broker","TimeBrokerSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"Web 帐户管理器","TokenBroker","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"Distributed Link Tracking Client","TrkWks","2   AUTO_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"User Manager","UserManager","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"更新 Orchestrator 服务","UsoSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"Credential Manager","VaultSvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\lsass.exe"
+"VMware Authorization Service","VMAuthdService","2   AUTO_START","4  RUNNING ","E:\VMware\vmware-authd.exe"
+"VMware DHCP Service","VMnetDHCP","2   AUTO_START","4  RUNNING ","C:\WINDOWS\SysWOW64\vmnetdhcp.exe"
+"VMware USB Arbitration Service","VMUSBArbService","2   AUTO_START","4  RUNNING ","""C:\Program Files (x86)\Common Files\VMware\USB\vmware-usbarbitrator64.exe"""
+"VMware NAT Service","VMware NAT Service","2   AUTO_START","4  RUNNING ","C:\WINDOWS\SysWOW64\vmnat.exe"
+"VMware Workstation Server","VMwareHostd","2   AUTO_START","4  RUNNING ","E:\VMware\vmware-hostd.exe -u ""C:\ProgramData\VMware\hostd\config.xml"""
+"Windows Connection Manager","Wcmsvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"Diagnostic Service Host","WdiServiceHost","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalService -p"
+"Diagnostic System Host","WdiSystemHost","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"WinHTTP Web Proxy Auto-Discovery Service","WinHttpAutoProxySvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"Windows Management Instrumentation","Winmgmt","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"WLAN AutoConfig","WlanSvc","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p"
+"Microsoft Account Sign-in Assistant","wlidsvc","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"WMI Performance Adapter","wmiApSrv","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\wbem\WmiApSrv.exe"
+"Windows 推送通知系统服务","WpnService","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k netsvcs -p"
+"Security Center","wscsvc","2   AUTO_START  (DELAYED)","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p"
+"Windows Search","WSearch","2   AUTO_START  (DELAYED)","4  RUNNING ","C:\WINDOWS\system32\SearchIndexer.exe /Embedding"
+"剪贴板用户服务_108767d6","cbdhsvc_108767d6","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k ClipboardSvcGroup -p"
+"连接设备平台用户服务_108767d6","CDPUserSvc_108767d6","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup"
+"同步主机_108767d6","OneSyncSvc_108767d6","2   AUTO_START  (DELAYED)","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup"
+"Contact Data_108767d6","PimIndexMaintenanceSvc_108767d6","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup"
+"User Data Storage_108767d6","UnistoreSvc_108767d6","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\System32\svchost.exe -k UnistackSvcGroup"
+"User Data Access_108767d6","UserDataSvc_108767d6","3   DEMAND_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup"
+"Windows Push Notifications User Service_108767d6","WpnUserService_108767d6","2   AUTO_START","4  RUNNING ","C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup"

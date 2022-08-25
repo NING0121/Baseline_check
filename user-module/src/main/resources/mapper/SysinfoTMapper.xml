@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--author 王研博 林佳评-->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gxa.scdx.cloud.user.mapper.SysinfoTMapper">
+
+    <resultMap type="com.gxa.scdx.cloud.user.pojo.Sysinfo_t" id="SysinfoTMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="hostname" column="hostname" jdbcType="VARCHAR"/>
+        <result property="ip" column="ip" jdbcType="VARCHAR"/>
+        <result property="osInfo" column="os_info" jdbcType="VARCHAR"/>
+        <result property="cpuType" column="cpu_type" jdbcType="VARCHAR"/>
+        <result property="cpuUsage" column="cpu_usage" jdbcType="VARCHAR"/>
+        <result property="listeningPort" column="listening_port" jdbcType="VARCHAR"/>
+        <result property="totalMem" column="total_mem" jdbcType="VARCHAR"/>
+        <result property="usedMem" column="used_mem" jdbcType="VARCHAR"/>
+        <result property="memUsage" column="mem_usage" jdbcType="VARCHAR"/>
+        <result property="checkTime" column="check_time" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Beas_Column_List">
+        id, hostname, ip, os_info, cpu_type, cpu_usage, listening_port, total_mem, used_mem, mem_usage, check_time
+    </sql>
+
+    <insert id="insert">
+        insert into scdx02.sysinfo_t(id, hostname, ip, os_info, cpu_type, cpu_usage, listening_port, total_mem, used_mem, mem_usage, check_time)
+        values (#{id},#{hostname}, #{ip},#{osInfo},#{cpuType},#{cpuUsage},#{listeningPort},#{totalMem},#{usedMem},#{memUsage},#{checkTime});
+    </insert>
+    <update id="updateById"></update>
+    <delete id="deleteById">
+        delete from scdx02.sysinfo_t where id = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="com.gxa.scdx.cloud.user.pojo.Sysinfo_t">
+        select id, hostname, ip, os_info, cpu_type, cpu_usage, listening_port, total_mem, used_mem, mem_usage, check_time from scdx02.sysinfo_t;
+    </select>
+    <select id="selectById" resultType="com.gxa.scdx.cloud.user.pojo.Sysinfo_t">
+        select id, hostname, ip, os_info, cpu_type, cpu_usage, listening_port, total_mem, used_mem, mem_usage, check_time from scdx02.sysinfo_t
+        where id = #{id};
+    </select>
+    <select id="countById" resultType="java.lang.Integer">
+        select count(id) from scdx02.sysinfo_t;
+    </select>
+    <select id="selectAllTimestamp" resultType="java.sql.Timestamp">
+        select check_time from scdx02.sysinfo_t;
+    </select>
+
+    <!--根据条件查询当前表的满足条件的个数-->
+    <select id="selectForCount" resultType="int">
+        select
+        count(id)
+        from scdx02.sysinfo_t
+        <where>
+            <if test="hostname != null and hostname != ''">
+                hostname like "%"#{hostname}"%"
+            </if>
+            <if test="ip != null and ip != ''">
+                ip like "%"#{ip}"%"
+            </if>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectForPage" resultMap="SysinfoTMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.sysinfo_t
+        <where>
+            <if test="hostname != null and hostname != ''">
+                hostname like "%"#{hostname}"%"
+            </if>
+            <if test="ip != null and ip != ''">
+                ip like "%"#{ip}"%"
+            </if>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+        </where>
+        limit #{index},10;
+    </select>
+</mapper>

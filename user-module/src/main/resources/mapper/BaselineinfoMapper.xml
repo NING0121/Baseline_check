@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--author 王研博 王楠楠-->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.scdx.cloud.user.mapper.BaselineinfoMapper">
+
+    <resultMap type="com.gxa.scdx.cloud.user.pojo.Baselineinfo" id="BaselineinfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="itemId" column="item_id" jdbcType="INTEGER"/>
+        <result property="itemName" column="item_name" jdbcType="VARCHAR"/>
+        <result property="currentVal" column="current_val" jdbcType="VARCHAR"/>
+        <result property="recommendVal" column="recommend_val" jdbcType="VARCHAR"/>
+        <result property="rule" column="rule" jdbcType="VARCHAR"/>
+        <result property="result" column="result" jdbcType="VARCHAR"/>
+        <result property="remediationPath" column="remediation_path" jdbcType="VARCHAR"/>
+        <result property="note" column="note" jdbcType="VARCHAR"/>
+        <result property="deviceId" column="device_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Beas_Column_List">
+        id
+        , item_id, item_name, current_val, recommend_val, rule, result, remediation_path, note, device_id
+    </sql>
+
+    <!--查询所有主键和名称-->
+    <select id="selectAll" resultMap="BaselineinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.baselineinfo
+        <where>
+            <if test="itemId != null">
+                item_id = #{itemId},
+            </if>
+            <if test="itemName != null and itemName != ''">
+                item_name = #{itemName},
+            </if>
+            <if test="currentVal != null and currentVal != ''">
+                current_val = #{currentVal},
+            </if>
+            <if test="recommendVal != null and recommendVal != ''">
+                recommend_val = #{recommendVal},
+            </if>
+            <if test="rule != null and rule != ''">
+                rule = #{rule},
+            </if>
+            <if test="result != null and result != ''">
+                result = #{result},
+            </if>
+            <if test="remediationPath != null and remediationPath != ''">
+                remediation_path = #{remediationPath},
+            </if>
+            <if test="note != null and note != ''">
+                note = #{note},
+            </if>
+            <if test="deviceId != null">
+                device_id = #{deviceId},
+            </if>
+        </where>
+    </select>
+
+    <!--查询单个-->
+    <select id="selectById" resultMap="BaselineinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.baselineinfo
+        where id = #{id}
+    </select>
+
+    <!--根据条件查询当前表的满足条件的个数-->
+    <select id="selectForCount" resultType="int">
+        select
+        count(id)
+        from scdx02.baselineinfo
+        <where>
+            <if test="search_id != null and search_id != ''">
+                device_id like #{search_id}
+            </if>
+            <if test="search_result != null and search_result != ''">
+                and result like #{search_result}
+            </if>
+            <if test="search_name != null and search_name != ''">
+                and item_name like "%"#{search_name}"%"
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectForPage" resultMap="BaselineinfoMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.baselineinfo
+        <where>
+            <if test="search_id != null and search_id != ''">
+                device_id like #{search_id}
+            </if>
+            <if test="search_result != null and search_result != ''">
+                and result like #{search_result}
+            </if>
+            <if test="search_name != null and search_name != ''">
+                and item_name like "%"#{search_name}"%"
+            </if>
+        </where>
+        limit #{index},10;
+    </select>
+    <select id="countById" resultType="java.lang.Integer">
+        select count(id) from scdx02.baselineinfo;
+    </select>
+
+
+    <select id="selectForShow" resultType="java.lang.Integer">
+        select
+        count(id)
+        from scdx02.baselineinfo
+        <where>
+                result like "符合"
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="com.gxa.scdx.cloud.user.pojo.Baselineinfo">
+        insert into scdx02.baselineinfo(id, item_id, item_name, current_val, recommend_val, rule, result,
+                                        remediation_path, note, device_id)
+        values (#{id}, #{itemId}, #{itemName}, #{currentVal}, #{recommendVal}, #{rule}, #{result}, #{remediationPath},
+                #{note}, #{deviceId})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateById" parameterType="com.gxa.scdx.cloud.user.pojo.Baselineinfo">
+        update scdx02.baselineinfo
+        <set>
+            <if test="itemId != null">
+                item_id = #{itemId},
+            </if>
+            <if test="itemName != null and itemName != ''">
+                item_name = #{itemName},
+            </if>
+            <if test="currentVal != null and currentVal != ''">
+                current_val = #{currentVal},
+            </if>
+            <if test="recommendVal != null and recommendVal != ''">
+                recommend_val = #{recommendVal},
+            </if>
+            <if test="rule != null and rule != ''">
+                rule = #{rule},
+            </if>
+            <if test="result != null and result != ''">
+                result = #{result},
+            </if>
+            <if test="remediationPath != null and remediationPath != ''">
+                remediation_path = #{remediationPath},
+            </if>
+            <if test="note != null and note != ''">
+                note = #{note},
+            </if>
+            <if test="deviceId != null">
+                device_id = #{deviceId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from scdx02.baselineinfo
+        where id = #{id}
+    </delete>
+
+</mapper>

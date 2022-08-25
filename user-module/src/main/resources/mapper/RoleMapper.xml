@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--author 代宇盛 王楠楠-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.scdx.cloud.user.mapper.RoleMapper">
+
+    <resultMap type="com.gxa.scdx.cloud.user.pojo.Role" id="RoleMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="roleAuth" column="role_auth" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Beas_Column_List">
+        id, role_name, role_auth        
+    </sql>
+
+    <!--查询所有主键和名称-->
+    <select id="selectAll" resultMap="RoleMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.role
+        <where>
+            <if test="roleName != null and roleName != ''">
+                role_name = #{roleName},
+            </if>
+            <if test="roleAuth != null">
+                role_auth = #{roleAuth},
+            </if>
+        </where>
+    </select>
+
+    <!--查询单个-->
+    <select id="selectById" resultMap="RoleMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.role
+        where id = #{id}
+    </select>
+
+    <!--根据条件查询当前表的满足条件的个数-->
+    <select id="selectForCount" resultType="int">
+        select
+        count(id)
+        from scdx02.role
+        <where>
+            <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectForPage" resultMap="RoleMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.role
+        <where>
+            <if test="name != null and name != ''">
+                name like "%"#{name}"%"
+            </if>
+        </where>
+        limit #{index},10;
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="com.gxa.scdx.cloud.user.pojo.Role">
+        insert into scdx02.role(id, role_name, role_auth)
+        values (#{id}, #{roleName}, #{roleAuth})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateById" parameterType="com.gxa.scdx.cloud.user.pojo.Role">
+        update scdx02.role
+        <set>
+            <if test="roleName != null and roleName != ''">
+                role_name = #{roleName},
+            </if>
+            <if test="roleAuth != null">
+                role_auth = #{roleAuth},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from scdx02.role where id = #{id}
+    </delete>
+
+</mapper>

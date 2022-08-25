@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--author 代宇盛 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gxa.scdx.cloud.user.mapper.ScanMapper">
+    <update id="updateByDeviceId">
+        update scdx02.task
+        <set>
+        <if test="val != null and val != '' or val == 0">
+            task_status = #{val},
+        </if>
+        </set>
+        where deviceId = #{id};
+    </update>
+
+    <select id="selectByDeviceId" resultType="java.lang.Integer">
+        select task_status from scdx02.task where deviceId = #{id};
+    </select>
+</mapper>

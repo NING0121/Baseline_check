@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--author 代宇盛 王楠楠 王研博-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxa.scdx.cloud.user.mapper.DepartmentMapper">
+
+    <resultMap type="com.gxa.scdx.cloud.user.pojo.Department" id="DepartmentMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="departmentName" column="department_name" jdbcType="VARCHAR"/>
+        <result property="departmentNumber" column="department_number" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Beas_Column_List">
+        id, department_name, department_number        
+    </sql>
+
+    <!--查询所有主键和名称-->
+    <select id="selectAll" resultMap="DepartmentMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.department
+        <where>
+            <if test="departmentName != null and departmentName != ''">
+                department_name = #{departmentName},
+            </if>
+            <if test="departmentNumber != null and departmentNumber != ''">
+                department_number = #{departmentNumber},
+            </if>
+        </where>
+    </select>
+
+    <!--查询单个-->
+    <select id="selectById" resultMap="DepartmentMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.department
+        where id = #{id}
+    </select>
+
+
+
+    <!--根据条件查询当前表的满足条件的个数-->
+    <select id="selectForCount" resultType="int">
+        select
+        count(id)
+        from scdx02.department
+        <where>
+            <if test="departmentNumber != null and departmentNumber != ''">
+                department_number like "%"#{departmentNumber}"%"
+            </if>
+            <if test="departmentName != null and departmentName != ''">
+                and department_name like "%"#{departmentName}"%"
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="selectForPage" resultMap="DepartmentMap">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.department
+        <where>
+            <if test="departmentNumber != null and departmentNumber != ''">
+                department_number like "%"#{departmentNumber}"%"
+            </if>
+            <if test="departmentName != null and departmentName != ''">
+                and department_name like "%"#{departmentName}"%"
+            </if>
+        </where>
+        limit #{index},10;
+    </select>
+
+    <select id="selectByName" resultType="com.gxa.scdx.cloud.user.pojo.Department">
+        select
+        <include refid="Beas_Column_List"/>
+        from scdx02.department
+        where department_name = #{department_name}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" parameterType="com.gxa.scdx.cloud.user.pojo.Department">
+        insert into scdx02.department(id, department_name, department_number)
+        values (#{id}, #{departmentName}, #{departmentNumber})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateById" parameterType="com.gxa.scdx.cloud.user.pojo.Department">
+        update scdx02.department
+        <set>
+            <if test="departmentName != null and departmentName != ''">
+                department_name = #{departmentName},
+            </if>
+            <if test="departmentNumber != null and departmentNumber != ''">
+                department_number = #{departmentNumber},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from scdx02.department where id = #{id}
+    </delete>
+
+</mapper>
